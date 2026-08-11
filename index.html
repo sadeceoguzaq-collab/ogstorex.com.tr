@@ -1,213 +1,229 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OGStorex İlanlar</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OGStorex</title>
 <style>
 :root{
-  --bg:#09090d;
-  --card:#111119;
-  --card2:#161620;
-  --line:#262635;
-  --text:#ffffff;
-  --muted:#a7a7b8;
-  --accent:#8b5cf6;
-  --accent2:#a78bfa;
+  --bg:#07070c;
+  --panel:#0f1018;
+  --panel2:#151622;
+  --line:#26283a;
+  --text:#f7f7fb;
+  --muted:#9da0b3;
+  --purple:#9b5cff;
+  --purple2:#6f2cff;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  min-height:100vh;
   font-family:Inter,Arial,Helvetica,sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 20% -10%, rgba(139,92,246,.16), transparent 35%),
-    radial-gradient(circle at 90% 10%, rgba(91,33,182,.12), transparent 30%),
+    radial-gradient(circle at 15% -5%, rgba(111,44,255,.18), transparent 34%),
+    radial-gradient(circle at 85% 10%, rgba(155,92,255,.10), transparent 28%),
     var(--bg);
 }
-.wrap{
-  width:min(1180px,calc(100% - 32px));
-  margin:0 auto;
-  padding:52px 0 70px;
+a{color:inherit}
+.wrap{width:min(1180px,calc(100% - 32px));margin:auto}
+header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(7,7,12,.86);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
-.top{
-  margin-bottom:30px;
+.nav{
+  min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px;
 }
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:8px;
-}
-.logo{
-  width:42px;height:42px;
-  border-radius:13px;
+.brand{display:flex;align-items:center;gap:12px;font-size:25px;font-weight:900;letter-spacing:.3px}
+.crown{
+  width:38px;height:38px;border-radius:11px;
   display:grid;place-items:center;
-  font-weight:900;
-  background:linear-gradient(135deg,var(--accent),#5b21b6);
-  box-shadow:0 10px 30px rgba(139,92,246,.24);
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  box-shadow:0 10px 26px rgba(139,75,255,.25)
 }
-h1{
-  margin:0;
-  font-size:clamp(28px,4vw,42px);
-  letter-spacing:-.8px;
+.brand b{color:var(--purple)}
+.navlinks{display:flex;gap:22px;align-items:center}
+.navlinks a{text-decoration:none;color:#c6c8d4;font-weight:700;font-size:14px}
+.join{
+  text-decoration:none;padding:11px 15px;border-radius:11px;
+  background:linear-gradient(135deg,var(--purple),var(--purple2));
+  font-weight:800;box-shadow:0 10px 28px rgba(111,44,255,.24)
 }
-.subtitle{
-  margin:0;
-  color:var(--muted);
-  font-size:15px;
+.hero{
+  padding:58px 0 30px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center;
 }
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
+.kicker{
+  display:inline-block;padding:7px 10px;border-radius:999px;
+  border:1px solid rgba(155,92,255,.28);
+  background:rgba(155,92,255,.08);
+  color:#cdb7ff;font-size:12px;font-weight:800;letter-spacing:.7px
 }
+.hero h1{font-size:clamp(44px,7vw,82px);line-height:.95;margin:18px 0 12px;letter-spacing:-2px}
+.hero h1 span{color:var(--purple)}
+.hero p{margin:0;max-width:610px;color:var(--muted);font-size:17px;line-height:1.65}
+.hero-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:13px 17px;border-radius:12px;text-decoration:none;font-weight:800
+}
+.btn-primary{background:linear-gradient(135deg,var(--purple),var(--purple2))}
+.btn-ghost{border:1px solid var(--line);background:#10111a;color:#d6d7e0}
+.hero-art{
+  border-radius:26px;overflow:hidden;border:1px solid #33264b;
+  background:#0d0d14;box-shadow:0 24px 70px rgba(0,0,0,.34)
+}
+.hero-art img{width:100%;height:100%;display:block;object-fit:cover;min-height:360px}
+
+.discord-card{
+  margin:18px 0 54px;padding:24px;
+  display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;
+  border:1px solid #4a2b74;border-radius:20px;
+  background:linear-gradient(135deg,rgba(155,92,255,.10),rgba(18,19,30,.96));
+  box-shadow:0 18px 60px rgba(0,0,0,.24)
+}
+.discord-icon{
+  width:58px;height:58px;border-radius:18px;display:grid;place-items:center;
+  font-size:28px;background:linear-gradient(135deg,#7c3aed,#a855f7)
+}
+.discord-card h2{margin:0 0 6px;font-size:22px}
+.discord-card p{margin:0;color:var(--muted);line-height:1.5}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:0 0 18px}
+.section-head h2{margin:0;font-size:28px}
+.section-head p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-bottom:70px}
 .card{
-  display:block;
-  color:inherit;
-  text-decoration:none;
-  background:linear-gradient(180deg,var(--card2),var(--card));
-  border:1px solid var(--line);
-  border-radius:20px;
-  overflow:hidden;
-  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+  display:block;text-decoration:none;
+  overflow:hidden;border-radius:18px;
+  border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));
+  transition:.18s ease;
 }
-.card:hover{
-  transform:translateY(-4px);
-  border-color:#4a376b;
-  box-shadow:0 18px 50px rgba(0,0,0,.35);
+.card:hover{transform:translateY(-4px);border-color:#54397d;box-shadow:0 18px 42px rgba(0,0,0,.28)}
+.thumb{aspect-ratio:16/10;width:100%;object-fit:cover;background:#181927}
+.body{padding:16px}
+.tag{font-size:11px;font-weight:900;letter-spacing:.6px;color:#c9b3ff;text-transform:uppercase}
+.title{margin:8px 0 8px;font-size:19px}
+.desc{margin:0;color:var(--muted);font-size:13px;line-height:1.45;min-height:38px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:15px;padding-top:14px;border-top:1px solid #252636}
+.price{font-size:21px;font-weight:900;color:#b388ff}
+.goto{font-size:12px;color:#d4c7f0}
+.empty{
+  grid-column:1/-1;padding:46px;border:1px dashed #33354b;border-radius:18px;
+  color:#8f92a4;text-align:center;background:rgba(255,255,255,.015)
 }
-.thumb{
-  width:100%;
-  aspect-ratio:16/10;
-  object-fit:cover;
-  display:block;
-  background:#181824;
-}
-.body{padding:17px}
-.category{
-  display:inline-block;
-  margin-bottom:9px;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.7px;
-  text-transform:uppercase;
-  color:#ccb8ff;
-  background:rgba(139,92,246,.11);
-  border:1px solid rgba(139,92,246,.26);
-  padding:6px 8px;
-  border-radius:999px;
-}
-.title{
-  margin:0 0 8px;
-  font-size:18px;
-  line-height:1.3;
-}
-.desc{
-  margin:0;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
-  min-height:39px;
-}
-.bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:15px;
-  padding-top:14px;
-  border-top:1px solid #232331;
-}
-.price{
-  font-size:21px;
-  font-weight:900;
-  color:var(--accent2);
-}
-.go{
-  font-size:12px;
-  color:#d7ccf6;
-}
+footer{border-top:1px solid #1c1d2a;color:#777b8d;text-align:center;padding:26px 0 34px}
 @media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .discord-card{grid-template-columns:auto 1fr}
+  .discord-card .join{grid-column:1/-1}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media(max-width:600px){
-  .wrap{width:min(100% - 22px,1180px);padding-top:28px}
+@media(max-width:620px){
+  .navlinks{display:none}
+  .wrap{width:min(100% - 22px,1180px)}
+  .hero{padding-top:34px}
+  .hero h1{font-size:47px}
   .grid{grid-template-columns:1fr}
+  .discord-card{grid-template-columns:1fr;text-align:center}
+  .discord-icon{margin:auto}
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <div class="brand">
-      <div class="logo">OG</div>
-      <div>
-        <h1>OGStorex İlanlar</h1>
-        <p class="subtitle">İlana tıklayınca İtemSatış sayfasına yönlendirilirsin.</p>
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="crown">♛</span><span>OGSTORE<b>X</b></span></div>
+    <nav class="navlinks">
+      <a href="#anasayfa">Anasayfa</a>
+      <a href="#ilanlar">İlanlar</a>
+      <a href="#discord">Discord Sunucumuz</a>
+    </nav>
+    <a class="join" id="topDiscord" href="#" target="_blank" rel="noopener">Discord'a Katıl</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="anasayfa">
+    <div>
+      <span class="kicker">OGSTOREX • DİJİTAL İLANLAR</span>
+      <h1>İLANLAR.<br><span>TEK TIKLA.</span></h1>
+      <p>İlan kartlarından birine tıkladığında direkt ilgili İtemSatış ilanına gidersin. Gereksiz panel yok, üyelik yok, sadece ilanlar ve Discord sunucumuz.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#ilanlar">İlanları Gör</a>
+        <a class="btn btn-ghost" id="heroDiscord" href="#" target="_blank" rel="noopener">Discord Sunucumuz</a>
       </div>
     </div>
-  </div>
+    <div class="hero-art">
+      <img src="discord-hero.png" alt="OGStorex Discord görseli">
+    </div>
+  </section>
 
-  <div class="grid" id="ilanlar"></div>
-</div>
+  <section class="discord-card" id="discord">
+    <div class="discord-icon">💬</div>
+    <div>
+      <h2>Discord Sunucumuz</h2>
+      <p>Duyurular, yeni ilanlar ve topluluk için sunucumuza katıl.</p>
+    </div>
+    <a class="join" id="cardDiscord" href="#" target="_blank" rel="noopener">Sunucuya Katıl →</a>
+  </section>
+
+  <section id="ilanlar">
+    <div class="section-head">
+      <div>
+        <h2>İlanlar</h2>
+        <p>Sen linkleri attıkça ilanları buraya tek tek ekleyeceğiz.</p>
+      </div>
+    </div>
+    <div class="grid" id="ilanGrid"></div>
+  </section>
+</main>
+
+<footer>OGStorex • Local HTML</footer>
 
 <script>
-/*
-  SADECE BURAYI DÜZENLE.
-  Her ilan için:
-  baslik = İlan adı
-  fiyat = Fiyat
-  kategori = Kategori
-  aciklama = Kısa açıklama
-  resim = Görsel linki
-  link = İtemSatış ilan linki
-*/
+// BURAYA SADECE KENDİ DISCORD DAVET LİNKİNİ YAZ.
+const DISCORD_LINK = "https://discord.gg/SENIN-LINKIN";
+
+// Sen İtemSatış linklerini attıkça bu listeye tek tek ilan ekleyeceğiz.
 const ilanlar = [
-  {
-    baslik: "14x Discord Boost",
-    fiyat: "199 TL",
-    kategori: "Discord",
-    aciklama: "1 aylık 14x boost paketi.",
-    resim: "https://placehold.co/900x560/171722/a78bfa?text=14x+BOOST",
-    link: "https://www.itemsatis.com/"
-  },
-  {
-    baslik: "500 Online Üye",
-    fiyat: "149 TL",
-    kategori: "Discord",
-    aciklama: "500 online üye ilanı.",
-    resim: "https://placehold.co/900x560/171722/a78bfa?text=500+ONLINE",
-    link: "https://www.itemsatis.com/"
-  },
-  {
-    baslik: "1000 Offline Üye",
-    fiyat: "99 TL",
-    kategori: "Discord",
-    aciklama: "1000 offline üye ilanı.",
-    resim: "https://placehold.co/900x560/171722/a78bfa?text=1000+OFFLINE",
-    link: "https://www.itemsatis.com/"
-  }
+  // ÖRNEK:
+  // {
+  //   baslik: "14x Discord Boost",
+  //   fiyat: "199 TL",
+  //   kategori: "Discord",
+  //   aciklama: "1 aylık 14x boost",
+  //   resim: "ilan-resmi.png",
+  //   link: "https://www.itemsatis.com/...."
+  // }
 ];
 
-const alan = document.getElementById("ilanlar");
+["topDiscord","heroDiscord","cardDiscord"].forEach(id=>{
+  document.getElementById(id).href = DISCORD_LINK;
+});
 
-alan.innerHTML = ilanlar.map(ilan => `
-  <a class="card" href="${ilan.link}" target="_blank" rel="noopener noreferrer">
-    <img class="thumb" src="${ilan.resim}" alt="${ilan.baslik}">
-    <div class="body">
-      <span class="category">${ilan.kategori}</span>
-      <h2 class="title">${ilan.baslik}</h2>
-      <p class="desc">${ilan.aciklama}</p>
-      <div class="bottom">
-        <div class="price">${ilan.fiyat}</div>
-        <div class="go">İlana git →</div>
+const grid = document.getElementById("ilanGrid");
+
+if(!ilanlar.length){
+  grid.innerHTML = `<div class="empty">Henüz ilan eklenmedi. İtemSatış ilan linklerini gönder; tek tek ekleyelim.</div>`;
+}else{
+  grid.innerHTML = ilanlar.map(x=>`
+    <a class="card" href="${x.link}" target="_blank" rel="noopener noreferrer">
+      <img class="thumb" src="${x.resim}" alt="${x.baslik}">
+      <div class="body">
+        <div class="tag">${x.kategori}</div>
+        <h3 class="title">${x.baslik}</h3>
+        <p class="desc">${x.aciklama}</p>
+        <div class="row">
+          <span class="price">${x.fiyat}</span>
+          <span class="goto">İlanı Gör →</span>
+        </div>
       </div>
-    </div>
-  </a>
-`).join("");
+    </a>
+  `).join("");
+}
 </script>
 </body>
 </html>
