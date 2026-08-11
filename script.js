@@ -1,6 +1,6 @@
 
 const icon = (name, cls = "") =>
-  `<svg class="icon ${cls}" aria-hidden="true"><use href="assets/lucide.svg#${name}"></use></svg>`;
+  `<svg class="icon ${cls}" aria-hidden="true"><use href="#${name}"></use></svg>`;
 
 const discordLogo = (cls = "") => `
   <svg class="icon ${cls}" viewBox="0 0 64 64" aria-hidden="true">

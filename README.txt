@@ -1,13 +1,13 @@
-OGSTOREX PREMIUM V3
+OGSTOREX PREMIUM V5 - ICON FIX
 
 - Node.js yok.
-- Site local/static çalışır.
-- index.html dosyasını çift tıkla.
-- Lucide ikonları assets/lucide.svg dosyasında local olarak paketlenmiştir.
+- Site tamamen local/static çalışır.
+- index.html dosyasını çift tıklayarak aç.
+- Lucide ikonları her HTML dosyasına inline SVG sprite olarak gömüldü.
+- Bu nedenle file:// üzerinden açıldığında ikonlar kaybolmaz.
+- Discord sunucu kartlarında Discord logosu kullanılır.
 - Discord bağlantıları:
   https://discord.gg/enesbatur
   https://discord.gg/oguz
 
-İLAN EKLEME:
-data.js içindeki window.OGSTOREX.listings dizisine yeni ilan ekle.
-İtemSatış linklerini gönderdiğinde bu dosyaya kartları tek tek ekleyebiliriz.
+İlanlar sonraki aşamada data.js dosyasına eklenecek.
