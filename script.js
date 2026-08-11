@@ -1,6 +1,14 @@
 
 const icon = (name, cls = "") =>
-  `<svg class="icon ${cls}" aria-hidden="true"><use href="#${name}"></use></svg>`;
+  `<svg class="icon ${cls}" aria-hidden="true"><use href="assets/lucide.svg#${name}"></use></svg>`;
+
+const discordLogo = (cls = "") => `
+  <svg class="icon ${cls}" viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M22 20c6-3 14-3 20 0l3 6c3 1 5 4 5 8 0 8-8 14-18 14S14 42 14 34c0-4 2-7 5-8l3-6Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="26.5" cy="34" r="3" fill="currentColor" stroke="none"/>
+    <circle cx="37.5" cy="34" r="3" fill="currentColor" stroke="none"/>
+    <path d="M26 40c3.5 2.5 8.5 2.5 12 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  </svg>`;
 
 function renderServers() {
   document.querySelectorAll("[data-server-grid]").forEach(grid => {
@@ -8,7 +16,7 @@ function renderServers() {
     grid.innerHTML = items.map((s, i) => `
       <article class="server-card">
         <div class="server-no">0${i+1}</div>
-        <div class="server-logo">${icon("messages-square")}</div>
+        <div class="server-logo">${discordLogo()}</div>
         <h3>${s.name}</h3>
         <p>${s.description}</p>
         <div class="server-tags">
