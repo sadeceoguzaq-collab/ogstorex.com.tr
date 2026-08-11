@@ -10,13 +10,43 @@ const discordLogo = (cls = "") => `
     <path d="M26 40c3.5 2.5 8.5 2.5 12 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
   </svg>`;
 
+const inviteCache = new Map();
+
+async function getInviteMeta(code) {
+  if (inviteCache.has(code)) return inviteCache.get(code);
+  const p = fetch(`https://discord.com/api/v10/invites/${encodeURIComponent(code)}?with_counts=true`, {
+    headers: { Accept: "application/json" },
+    cache: "no-store"
+  }).then(r => r.ok ? r.json() : null).catch(() => null);
+  inviteCache.set(code, p);
+  return p;
+}
+
+function avatarMarkup(s) {
+  return s.fallbackIcon
+    ? `<img class="server-avatar" src="${s.fallbackIcon}" alt="${s.name} sunucu logosu">`
+    : `<span class="server-avatar-fallback">${discordLogo()}</span>`;
+}
+
+function setLiveAvatar(box, s, meta) {
+  if (!box || !meta?.guild?.id || !meta?.guild?.icon) return;
+  const hash = meta.guild.icon;
+  const ext = hash.startsWith("a_") ? "gif" : "webp";
+  const url = `https://cdn.discordapp.com/icons/${meta.guild.id}/${hash}.${ext}?size=256`;
+  const img = new Image();
+  img.className = "server-avatar";
+  img.alt = `${s.name} sunucu logosu`;
+  img.onload = () => box.replaceChildren(img);
+  img.src = url;
+}
+
 function renderServers() {
   document.querySelectorAll("[data-server-grid]").forEach(grid => {
-    const items = (window.OGSTOREX?.discordServers || []);
+    const items = window.OGSTOREX?.discordServers || [];
     grid.innerHTML = items.map((s, i) => `
       <article class="server-card">
         <div class="server-no">0${i+1}</div>
-        <div class="server-logo">${discordLogo()}</div>
+        <div class="server-logo" data-server-logo="${s.inviteCode}">${avatarMarkup(s)}</div>
         <h3>${s.name}</h3>
         <p>${s.description}</p>
         <div class="server-tags">
@@ -24,25 +54,25 @@ function renderServers() {
         </div>
         <div class="server-bottom">
           <span class="server-url">${s.short}</span>
-          <a class="server-open" href="${s.invite}" target="_blank" rel="noopener noreferrer" aria-label="${s.name} Discord sunucusunu aç">
-            ${icon("arrow-up-right")}
-          </a>
+          <a class="server-open" href="${s.invite}" target="_blank" rel="noopener noreferrer">${icon("arrow-up-right")}</a>
         </div>
       </article>
     `).join("");
+
+    items.forEach(async s => {
+      const meta = await getInviteMeta(s.inviteCode);
+      setLiveAvatar(grid.querySelector(`[data-server-logo="${s.inviteCode}"]`), s, meta);
+    });
   });
 }
 
 function listingCard(item) {
   return `
     <a class="listing-card" href="${item.link}" target="_blank" rel="noopener noreferrer">
-      <div class="listing-media">
-        <div class="listing-icon">${icon(item.icon || "package")}</div>
-      </div>
+      <div class="listing-media"><div class="listing-icon">${icon(item.icon || "package")}</div></div>
       <div class="listing-body">
         <div class="listing-label">${item.category || "İlan"}</div>
-        <h3>${item.title}</h3>
-        <p>${item.description || ""}</p>
+        <h3>${item.title}</h3><p>${item.description || ""}</p>
         <div class="listing-foot">
           <span class="listing-price">${item.price || ""}</span>
           <span class="listing-open">İlanı gör ${icon("arrow-up-right")}</span>
@@ -56,16 +86,8 @@ function renderListings() {
     const source = window.OGSTOREX?.listings || [];
     const q = (document.querySelector("[data-listing-search]")?.value || "").trim().toLowerCase();
     const list = source.filter(x => (`${x.title} ${x.category} ${x.description}`).toLowerCase().includes(q));
-
     if (!list.length) {
-      grid.innerHTML = `
-        <div class="empty-state">
-          <div>
-            <div class="empty-icon">${icon("package-open")}</div>
-            <h3>${source.length ? "Aramana uygun ilan bulunamadı" : "İlan alanı hazır"}</h3>
-            <p>${source.length ? "Farklı bir arama deneyebilirsin." : "İtemSatış ilan linklerini gönderdiğinde kartları aynı premium tasarım diliyle buraya tek tek ekleyeceğiz."}</p>
-          </div>
-        </div>`;
+      grid.innerHTML = `<div class="empty-state"><div><div class="empty-icon">${icon("package-open")}</div><h3>${source.length ? "Aramana uygun ilan bulunamadı" : "İlan alanı hazır"}</h3><p>${source.length ? "Farklı bir arama deneyebilirsin." : "İtemSatış ilan linklerini gönderdiğinde kartları buraya tek tek ekleyeceğiz."}</p></div></div>`;
       return;
     }
     grid.innerHTML = list.map(listingCard).join("");
