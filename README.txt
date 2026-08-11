@@ -28,3 +28,9 @@ V9 - İlk İlan:
 - İlan kartı önce OGStorex detay sayfasına gider.
 - Detay sayfasında açıklama, fiyat, stok, garanti ve hızlı bilgiler bulunur.
 - 'İtemSatış'ta İlana Git' butonu gerçek ilana yönlendirir.
+
+
+V10:
+- İlan kartlarındaki vitrin görseli küçültüldü.
+- Detay sayfasındaki büyük görsel değiştirilmedi.
+- Bundan sonraki ilanlar aynı kart + detay sayfası yapısıyla eklenebilir.

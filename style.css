@@ -880,3 +880,45 @@ button,input{font:inherit}
   .product-summary h1{font-size:30px}
   .detail-points{grid-template-columns:1fr}
 }
+
+
+/* --- V10 COMPACT LISTING CARD IMAGE --- */
+.listing-card{
+  min-height:320px !important;
+}
+
+.listing-media{
+  height:150px !important;
+  min-height:150px !important;
+  max-height:150px !important;
+}
+
+.listing-image{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+
+.listing-body{
+  padding:16px !important;
+  gap:8px !important;
+}
+
+.listing-body h3{
+  font-size:18px !important;
+}
+
+.listing-body p{
+  font-size:12px !important;
+  line-height:1.5 !important;
+  min-height:36px;
+}
+
+@media(max-width:620px){
+  .listing-media{
+    height:145px !important;
+    min-height:145px !important;
+    max-height:145px !important;
+  }
+}
