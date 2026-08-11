@@ -1,8 +1,13 @@
-OGSTOREX LOCAL SITE
+OGSTOREX PREMIUM V3
 
-1) index.html dosyasını çift tıklayarak aç.
-2) Site internete yüklenmeden local çalışır.
-3) İlan eklemek için sadece data.js dosyasındaki OGSTOREX_LISTINGS listesine yeni kayıt ekle.
-4) Discord linkleri:
-   - https://discord.gg/enesbatur
-   - https://discord.gg/oguz
+- Node.js yok.
+- Site local/static çalışır.
+- index.html dosyasını çift tıkla.
+- Lucide ikonları assets/lucide.svg dosyasında local olarak paketlenmiştir.
+- Discord bağlantıları:
+  https://discord.gg/enesbatur
+  https://discord.gg/oguz
+
+İLAN EKLEME:
+data.js içindeki window.OGSTOREX.listings dizisine yeni ilan ekle.
+İtemSatış linklerini gönderdiğinde bu dosyaya kartları tek tek ekleyebiliriz.
