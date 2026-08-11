@@ -46,9 +46,13 @@ function renderServers() {
     grid.innerHTML = items.map((s, i) => `
       <article class="server-card">
         <div class="server-no">0${i+1}</div>
-        <div class="server-logo" data-server-logo="${s.inviteCode}">${avatarMarkup(s)}</div>
-        <h3>${s.name}</h3>
-        <p>${s.description}</p>
+        <div class="server-head">
+          <div class="server-logo" data-server-logo="${s.inviteCode}">${avatarMarkup(s)}</div>
+          <div class="server-head-copy">
+            <h3>${s.name}</h3>
+            <p>${s.description}</p>
+          </div>
+        </div>
         <div class="server-tags">
           ${s.tags.map((t, idx) => `<span class="server-tag">${icon(["users-round","radio-tower","badge-check"][idx % 3])}${t}</span>`).join("")}
         </div>
