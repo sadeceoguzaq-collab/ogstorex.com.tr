@@ -3,348 +3,211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OGStorex - Local İlan Sitesi</title>
+<title>OGStorex İlanlar</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#09090d;
+  --card:#111119;
+  --card2:#161620;
+  --line:#262635;
+  --text:#ffffff;
+  --muted:#a7a7b8;
+  --accent:#8b5cf6;
+  --accent2:#a78bfa;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#0b0b10;
-  color:#fff;
+  margin:0;
   min-height:100vh;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 20% -10%, rgba(139,92,246,.16), transparent 35%),
+    radial-gradient(circle at 90% 10%, rgba(91,33,182,.12), transparent 30%),
+    var(--bg);
 }
-header{
-  position:sticky;top:0;z-index:10;
-  background:rgba(11,11,16,.94);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #252532;
+.wrap{
+  width:min(1180px,calc(100% - 32px));
+  margin:0 auto;
+  padding:52px 0 70px;
 }
-.nav{
-  max-width:1200px;margin:auto;padding:18px 20px;
-  display:flex;align-items:center;justify-content:space-between;gap:18px;
+.top{
+  margin-bottom:30px;
 }
-.brand{font-size:26px;font-weight:800;letter-spacing:.5px}
-.brand span{color:#8b5cf6}
-.nav button,.btn{
-  border:0;border-radius:12px;padding:11px 16px;
-  cursor:pointer;font-weight:700;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:8px;
 }
-.primary{background:#7c3aed;color:white}
-.secondary{background:#20202b;color:#fff;border:1px solid #343445}
-.hero{
-  max-width:1200px;margin:45px auto 20px;padding:0 20px;
-  display:grid;grid-template-columns:1.2fr .8fr;gap:22px;
+.logo{
+  width:42px;height:42px;
+  border-radius:13px;
+  display:grid;place-items:center;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--accent),#5b21b6);
+  box-shadow:0 10px 30px rgba(139,92,246,.24);
 }
-.hero-card,.panel{
-  border:1px solid #28283a;
-  background:linear-gradient(145deg,#151520,#101018);
-  border-radius:24px;
-  padding:28px;
-  box-shadow:0 16px 50px rgba(0,0,0,.25);
+h1{
+  margin:0;
+  font-size:clamp(28px,4vw,42px);
+  letter-spacing:-.8px;
 }
-.hero h1{font-size:48px;line-height:1.05;margin-bottom:15px}
-.hero p{color:#b7b7c8;font-size:17px;line-height:1.6}
-.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.badge{background:#211637;color:#c4a7ff;border:1px solid #50308a;padding:8px 12px;border-radius:999px;font-size:13px}
-.stat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
-.stat div{background:#151522;border:1px solid #2c2c3e;padding:18px;border-radius:16px}
-.stat strong{font-size:24px;display:block}
-.stat small{color:#9999ad}
-main{max-width:1200px;margin:30px auto;padding:0 20px 60px}
-.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
-.toolbar input,.toolbar select,.modal input,.modal textarea,.modal select{
-  width:100%;background:#12121b;color:#fff;border:1px solid #303044;
-  border-radius:12px;padding:12px 13px;outline:none;
+.subtitle{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
 }
-.toolbar input{flex:1;min-width:220px}
-.toolbar select{width:210px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
 .card{
-  background:#12121a;border:1px solid #29293a;border-radius:20px;
-  overflow:hidden;display:flex;flex-direction:column;
+  display:block;
+  color:inherit;
+  text-decoration:none;
+  background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
 }
-.card img{width:100%;height:190px;object-fit:cover;background:#1b1b26}
-.card-body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
-.category{font-size:12px;color:#bba4ff;text-transform:uppercase;letter-spacing:.8px}
-.card h3{font-size:20px}
-.desc{color:#aaaabd;line-height:1.45;min-height:44px}
-.meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto}
-.price{font-size:22px;font-weight:800;color:#a78bfa}
-.stock{font-size:13px;color:#9ca3af}
-.card-actions{display:flex;gap:8px;margin-top:10px}
-.card-actions button,.card-actions a{flex:1;text-align:center;text-decoration:none;padding:10px;border-radius:10px;font-weight:700}
-.contact{background:#7c3aed;color:#fff}
-.delete{background:#2a1519;color:#ff9ca9;border:1px solid #5e2830}
-.empty{grid-column:1/-1;text-align:center;padding:50px;color:#9a9aae;border:1px dashed #333348;border-radius:18px}
-footer{text-align:center;color:#77778b;padding:25px}
-.modal-backdrop{
-  display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);
-  z-index:50;align-items:center;justify-content:center;padding:20px;
+.card:hover{
+  transform:translateY(-4px);
+  border-color:#4a376b;
+  box-shadow:0 18px 50px rgba(0,0,0,.35);
 }
-.modal{width:min(560px,100%);background:#111119;border:1px solid #343447;border-radius:20px;padding:22px}
-.modal h2{margin-bottom:15px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-grid .full{grid-column:1/-1}
-.modal textarea{min-height:100px;resize:vertical}
-.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
-.notice{font-size:13px;color:#9c9caf;margin-top:10px}
+.thumb{
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+  display:block;
+  background:#181824;
+}
+.body{padding:17px}
+.category{
+  display:inline-block;
+  margin-bottom:9px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+  color:#ccb8ff;
+  background:rgba(139,92,246,.11);
+  border:1px solid rgba(139,92,246,.26);
+  padding:6px 8px;
+  border-radius:999px;
+}
+.title{
+  margin:0 0 8px;
+  font-size:18px;
+  line-height:1.3;
+}
+.desc{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+  min-height:39px;
+}
+.bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:15px;
+  padding-top:14px;
+  border-top:1px solid #232331;
+}
+.price{
+  font-size:21px;
+  font-weight:900;
+  color:var(--accent2);
+}
+.go{
+  font-size:12px;
+  color:#d7ccf6;
+}
 @media(max-width:900px){
-  .hero{grid-template-columns:1fr}
-  .grid{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media(max-width:620px){
-  .hero h1{font-size:36px}
+@media(max-width:600px){
+  .wrap{width:min(100% - 22px,1180px);padding-top:28px}
   .grid{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .form-grid .full{grid-column:auto}
 }
 </style>
 </head>
 <body>
-<header>
-  <div class="nav">
-    <div class="brand">OG<span>Storex</span></div>
-    <button class="btn primary" onclick="openAdmin()">+ İlan Ekle</button>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="hero-card">
-    <h1>Dijital ürünlerini<br><span style="color:#8b5cf6">tek yerde</span> sergile.</h1>
-    <p>Bu sayfa tamamen local çalışır. İlanlarını ekleyebilir, silebilir, arayabilir ve kategorilere göre filtreleyebilirsin.</p>
-    <div class="badges">
-      <div class="badge">Discord Hizmetleri</div>
-      <div class="badge">Botlar</div>
-      <div class="badge">Dijital Ürünler</div>
-      <div class="badge">Local Kullanım</div>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <div class="logo">OG</div>
+      <div>
+        <h1>OGStorex İlanlar</h1>
+        <p class="subtitle">İlana tıklayınca İtemSatış sayfasına yönlendirilirsin.</p>
+      </div>
     </div>
   </div>
-  <div class="panel">
-    <h2>Panel Özeti</h2>
-    <div class="stat">
-      <div><strong id="totalCount">0</strong><small>Toplam ilan</small></div>
-      <div><strong id="stockCount">0</strong><small>Toplam stok</small></div>
-    </div>
-    <p class="notice">Veriler yalnızca bu tarayıcıdaki localStorage alanında tutulur.</p>
-  </div>
-</section>
 
-<main>
-  <div class="toolbar">
-    <input id="search" type="text" placeholder="İlan ara..." oninput="renderProducts()">
-    <select id="filterCategory" onchange="renderProducts()">
-      <option value="">Tüm kategoriler</option>
-      <option>Discord Boost</option>
-      <option>Online Üye</option>
-      <option>Offline Üye</option>
-      <option>Bot</option>
-      <option>Diğer</option>
-    </select>
-  </div>
-  <div id="products" class="grid"></div>
-</main>
-
-<footer>OGStorex • Local HTML sürümü</footer>
-
-<div id="adminModal" class="modal-backdrop">
-  <div class="modal">
-    <h2>Admin Girişi</h2>
-    <input id="adminPassword" type="password" placeholder="Şifre">
-    <div class="modal-actions">
-      <button class="btn secondary" onclick="closeModal('adminModal')">Vazgeç</button>
-      <button class="btn primary" onclick="checkAdmin()">Giriş</button>
-    </div>
-    <p class="notice">Varsayılan şifre: <b>ogstorex123</b></p>
-  </div>
-</div>
-
-<div id="productModal" class="modal-backdrop">
-  <div class="modal">
-    <h2>Yeni İlan Ekle</h2>
-    <div class="form-grid">
-      <input id="title" placeholder="İlan başlığı">
-      <input id="price" placeholder="Fiyat (örn. 150 TL)">
-      <select id="category">
-        <option>Discord Boost</option>
-        <option>Online Üye</option>
-        <option>Offline Üye</option>
-        <option>Bot</option>
-        <option>Diğer</option>
-      </select>
-      <input id="stock" type="number" min="0" placeholder="Stok">
-      <input id="image" class="full" placeholder="Görsel URL'si (opsiyonel)">
-      <input id="contact" class="full" placeholder="İletişim linki (örn. Discord davet linki)">
-      <textarea id="description" class="full" placeholder="Açıklama"></textarea>
-    </div>
-    <div class="modal-actions">
-      <button class="btn secondary" onclick="closeModal('productModal')">Vazgeç</button>
-      <button class="btn primary" onclick="addProduct()">İlanı Kaydet</button>
-    </div>
-  </div>
+  <div class="grid" id="ilanlar"></div>
 </div>
 
 <script>
-const STORAGE_KEY = "ogstorex_products_v1";
-const ADMIN_PASSWORD = "ogstorex123";
-let adminUnlocked = false;
-
-const defaultProducts = [
+/*
+  SADECE BURAYI DÜZENLE.
+  Her ilan için:
+  baslik = İlan adı
+  fiyat = Fiyat
+  kategori = Kategori
+  aciklama = Kısa açıklama
+  resim = Görsel linki
+  link = İtemSatış ilan linki
+*/
+const ilanlar = [
   {
-    id: Date.now()+1,
-    title:"14x Discord Boost",
-    price:"199 TL",
-    category:"Discord Boost",
-    stock:10,
-    image:"https://placehold.co/800x500/161622/9f7aea?text=14x+BOOST",
-    contact:"#",
-    description:"1 aylık 14x Discord boost ilanı."
+    baslik: "14x Discord Boost",
+    fiyat: "199 TL",
+    kategori: "Discord",
+    aciklama: "1 aylık 14x boost paketi.",
+    resim: "https://placehold.co/900x560/171722/a78bfa?text=14x+BOOST",
+    link: "https://www.itemsatis.com/"
   },
   {
-    id: Date.now()+2,
-    title:"500 Online Üye",
-    price:"149 TL",
-    category:"Online Üye",
-    stock:5,
-    image:"https://placehold.co/800x500/161622/9f7aea?text=500+ONLINE",
-    contact:"#",
-    description:"Sunucun için 500 online üye paketi."
+    baslik: "500 Online Üye",
+    fiyat: "149 TL",
+    kategori: "Discord",
+    aciklama: "500 online üye ilanı.",
+    resim: "https://placehold.co/900x560/171722/a78bfa?text=500+ONLINE",
+    link: "https://www.itemsatis.com/"
   },
   {
-    id: Date.now()+3,
-    title:"1000 Offline Üye",
-    price:"99 TL",
-    category:"Offline Üye",
-    stock:8,
-    image:"https://placehold.co/800x500/161622/9f7aea?text=1000+OFFLINE",
-    contact:"#",
-    description:"Sunucun için 1000 offline üye paketi."
+    baslik: "1000 Offline Üye",
+    fiyat: "99 TL",
+    kategori: "Discord",
+    aciklama: "1000 offline üye ilanı.",
+    resim: "https://placehold.co/900x560/171722/a78bfa?text=1000+OFFLINE",
+    link: "https://www.itemsatis.com/"
   }
 ];
 
-function loadProducts(){
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if(!saved){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultProducts));
-    return [...defaultProducts];
-  }
-  try { return JSON.parse(saved) } catch(e){ return [...defaultProducts] }
-}
+const alan = document.getElementById("ilanlar");
 
-function saveProducts(products){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-}
-
-function escapeHtml(str){
-  return String(str ?? "").replace(/[&<>"']/g, m => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  })[m]);
-}
-
-function renderProducts(){
-  const products = loadProducts();
-  const q = document.getElementById("search").value.trim().toLowerCase();
-  const cat = document.getElementById("filterCategory").value;
-  const list = products.filter(p=>{
-    const text = `${p.title} ${p.description} ${p.category}`.toLowerCase();
-    return (!q || text.includes(q)) && (!cat || p.category===cat);
-  });
-
-  document.getElementById("totalCount").textContent = products.length;
-  document.getElementById("stockCount").textContent =
-    products.reduce((a,p)=>a+(Number(p.stock)||0),0);
-
-  const root = document.getElementById("products");
-  if(!list.length){
-    root.innerHTML = `<div class="empty">Gösterilecek ilan bulunamadı.</div>`;
-    return;
-  }
-
-  root.innerHTML = list.map(p=>`
-    <article class="card">
-      <img src="${escapeHtml(p.image || 'https://placehold.co/800x500/161622/9f7aea?text=OGStorex')}" alt="">
-      <div class="card-body">
-        <div class="category">${escapeHtml(p.category)}</div>
-        <h3>${escapeHtml(p.title)}</h3>
-        <div class="desc">${escapeHtml(p.description)}</div>
-        <div class="meta">
-          <div class="price">${escapeHtml(p.price)}</div>
-          <div class="stock">Stok: ${escapeHtml(p.stock)}</div>
-        </div>
-        <div class="card-actions">
-          <a class="contact" href="${escapeHtml(p.contact || '#')}" target="_blank">İletişim</a>
-          ${adminUnlocked ? `<button class="delete" onclick="deleteProduct(${p.id})">Sil</button>` : ""}
-        </div>
+alan.innerHTML = ilanlar.map(ilan => `
+  <a class="card" href="${ilan.link}" target="_blank" rel="noopener noreferrer">
+    <img class="thumb" src="${ilan.resim}" alt="${ilan.baslik}">
+    <div class="body">
+      <span class="category">${ilan.kategori}</span>
+      <h2 class="title">${ilan.baslik}</h2>
+      <p class="desc">${ilan.aciklama}</p>
+      <div class="bottom">
+        <div class="price">${ilan.fiyat}</div>
+        <div class="go">İlana git →</div>
       </div>
-    </article>
-  `).join("");
-}
-
-function openAdmin(){
-  if(adminUnlocked){
-    document.getElementById("productModal").style.display="flex";
-    return;
-  }
-  document.getElementById("adminPassword").value="";
-  document.getElementById("adminModal").style.display="flex";
-}
-
-function checkAdmin(){
-  const value = document.getElementById("adminPassword").value;
-  if(value !== ADMIN_PASSWORD){
-    alert("Şifre yanlış.");
-    return;
-  }
-  adminUnlocked = true;
-  closeModal("adminModal");
-  document.getElementById("productModal").style.display="flex";
-  renderProducts();
-}
-
-function addProduct(){
-  const title = document.getElementById("title").value.trim();
-  const price = document.getElementById("price").value.trim();
-  if(!title || !price){
-    alert("Başlık ve fiyat zorunlu.");
-    return;
-  }
-
-  const products = loadProducts();
-  products.unshift({
-    id: Date.now(),
-    title,
-    price,
-    category: document.getElementById("category").value,
-    stock: Number(document.getElementById("stock").value || 0),
-    image: document.getElementById("image").value.trim(),
-    contact: document.getElementById("contact").value.trim(),
-    description: document.getElementById("description").value.trim()
-  });
-  saveProducts(products);
-
-  ["title","price","stock","image","contact","description"].forEach(id=>{
-    document.getElementById(id).value="";
-  });
-  closeModal("productModal");
-  renderProducts();
-}
-
-function deleteProduct(id){
-  if(!confirm("Bu ilan silinsin mi?")) return;
-  const products = loadProducts().filter(p=>p.id!==id);
-  saveProducts(products);
-  renderProducts();
-}
-
-function closeModal(id){
-  document.getElementById(id).style.display="none";
-}
-
-document.querySelectorAll(".modal-backdrop").forEach(el=>{
-  el.addEventListener("click",e=>{
-    if(e.target===el) el.style.display="none";
-  });
-});
-
-renderProducts();
+    </div>
+  </a>
+`).join("");
 </script>
 </body>
 </html>
