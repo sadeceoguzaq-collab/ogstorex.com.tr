@@ -19,5 +19,17 @@ window.OGSTOREX = {
       fallbackIcon: ""
     }
   ],
-  listings: []
+
+  listings: [
+    {
+      id: "500-offline-uye",
+      title: "500 Adet Offline Üye",
+      category: "Discord Üye",
+      description: "Discord sunucun için 500 adet offline global üye paketi. 30 gün garanti ile sunulur.",
+      price: "35,99 TL",
+      image: "assets/500-offline-uye.webp",
+      detail: "ilan-500-offline-uye.html",
+      link: "https://www.itemsatis.com/discord/500-adet-offline-uye-5587015.html"
+    }
+  ]
 };

@@ -20,3 +20,11 @@ V8 Discord final:
 - Avatar + başlık + açıklama tek hizalı başlık bloğuna alındı.
 - Kart yüksekliği içerikle doğal büyür.
 - Alt bağlantı kutusu normal akışta en alta sabitlenir.
+
+
+V9 - İlk İlan:
+- 500 Adet Offline Üye eklendi.
+- Gerçek ItemSatış ilan görseli local assets klasörüne kaydedildi.
+- İlan kartı önce OGStorex detay sayfasına gider.
+- Detay sayfasında açıklama, fiyat, stok, garanti ve hızlı bilgiler bulunur.
+- 'İtemSatış'ta İlana Git' butonu gerçek ilana yönlendirir.

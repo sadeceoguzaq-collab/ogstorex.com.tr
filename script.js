@@ -71,15 +71,21 @@ function renderServers() {
 }
 
 function listingCard(item) {
+  const href = item.detail || item.link;
+  const media = item.image
+    ? `<img class="listing-image" src="${item.image}" alt="${item.title}">`
+    : `<div class="listing-icon">${icon(item.icon || "package")}</div>`;
+
   return `
-    <a class="listing-card" href="${item.link}" target="_blank" rel="noopener noreferrer">
-      <div class="listing-media"><div class="listing-icon">${icon(item.icon || "package")}</div></div>
+    <a class="listing-card" href="${href}">
+      <div class="listing-media">${media}</div>
       <div class="listing-body">
         <div class="listing-label">${item.category || "İlan"}</div>
-        <h3>${item.title}</h3><p>${item.description || ""}</p>
+        <h3>${item.title}</h3>
+        <p>${item.description || ""}</p>
         <div class="listing-foot">
           <span class="listing-price">${item.price || ""}</span>
-          <span class="listing-open">İlanı gör ${icon("arrow-up-right")}</span>
+          <span class="listing-open">İlanı incele ${icon("arrow-right")}</span>
         </div>
       </div>
     </a>`;
