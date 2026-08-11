@@ -34,3 +34,17 @@ V10:
 - İlan kartlarındaki vitrin görseli küçültüldü.
 - Detay sayfasındaki büyük görsel değiştirilmedi.
 - Bundan sonraki ilanlar aynı kart + detay sayfası yapısıyla eklenebilir.
+
+
+V11 - TOPLU İLAN EKLEME
+-----------------------
+Toplam 7 offline üye ilanı:
+500 / 1000 / 1500 / 2000 / 2500 / 3000 / 3500
+
+Her ilan:
+- İlanlar sayfasında vitrin kartına sahiptir.
+- Ayrı OGStorex detay HTML sayfasına gider.
+- Detayda açıklama, fiyat, garanti, lokasyon ve sipariş notları bulunur.
+- 'İtemSatış'ta İlana Git' butonu ilgili gerçek İtemSatış ilanına yönlendirir.
+
+Gönderilen yeni linkler aynı yapıda eklenebilir.
